@@ -1,0 +1,58 @@
+= Sinatra Basic Authorization
+
+== Installation
+
+  sudo gem install sinatra-basic-auth
+
+== Usage
+
+  require "sinatra"
+  require "sinatra/basic_auth"
+
+  # Specify your authorization logic
+  authorize do |username, password|
+    username == "john" && password == "doe"
+  end
+
+  # Set protected routes
+  protect do
+    get "/admin" do
+      "Restricted page that only admin can access"
+    end
+  end
+
+You can specify different authorization logic for different realms.
+
+  authorize "Public" do |username, password|
+    username == "myapp" && password == "beta"
+  end
+
+  authorize "Admin" do |username, password|
+    username == "admin" && password == "a complex password"
+  end
+
+  protect "Public" do
+    get "/" do
+      "Home page"
+    end
+  end
+
+  protect "Admin" do
+    get "/admin" do
+      "Welcome, Mr. Administrator"
+    end
+  end
+
+= License
+
+(The MIT License)
+
+Copyright © 2010:
+
+* Nando Vieira (http://nandovieira.com.br)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
