@@ -43,6 +43,14 @@ You can specify different authorization logic for different realms.
     end
   end
 
+If you need to retrieve the credentials:
+
+  protect do
+    get "/" do
+      "Hello, #{auth.credentials.first}"
+    end
+  end
+
 = License
 
 (The MIT License)
